@@ -3,10 +3,7 @@
     <!-- strg + # -->
     <app-create-human (human)="onHuman($event)">
     </app-create-human>
-
-    <!-- input erstellen -->
-    <app-display-human value="[]">
-    </app-display-human>
+    <app-display-human [humans]="humans$" (delete)="onDelete($event)"></app-display-human>
 
     <!-- tabellenspalte auswählen und zurück geben -->
 
