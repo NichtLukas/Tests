@@ -1,0 +1,23 @@
+<form [formGroup]="form" (keydown)="readFormKeyInput($event)">
+  <mat-form-field appearance="fill" >
+    <mat-label>Name</mat-label>
+    <input matInput type="text" formControlName="name">
+    <button matSuffix mat-icon-button (click)="nameFormControl.reset()">
+      <mat-icon>close</mat-icon>
+    </button>
+    <mat-error *ngIf="nameFormControl.hasError('required')">
+      This is required!
+    </mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Age</mat-label>
+    <input matInput type="number" formControlName="age">
+    <button matSuffix mat-icon-button (click)="ageFormControl.reset()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  
+</form>
+
+

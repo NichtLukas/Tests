@@ -1,0 +1,15 @@
+
+.website-container{
+    display: flex;
+    background-color: yellow;
+    width: 90%;
+    height: 50%;
+    margin-left: 5%;
+    margin-top: 5%;
+}
+.create-human-container{
+    background-color: red;
+}
+.display-human-container{
+    background-color: blue;
+}
