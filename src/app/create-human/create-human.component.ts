@@ -1,4 +1,5 @@
 import { Component, EventEmitter, OnInit, Output} from '@angular/core';
+import { Keycodes } from '../keycodes';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HumanCreate } from '../human';
 import { CommonModule } from '@angular/common';
@@ -50,7 +51,7 @@ export class CreateHumanComponent implements OnInit {
 
   public readFormKeyInput(event:any): void{
     this.autoSaveHumanForm();
-    if (!(event.keyCode === 13)) return;
+    if (!(event.keyCode === Keycodes.ENTER)) return;
     this.sendFormValue();
   }
 
