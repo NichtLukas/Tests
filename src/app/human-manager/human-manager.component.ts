@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { HumanCreate } from '../human';
+import { Component} from '@angular/core';
+import { Observable } from 'rxjs';
+import { Human, HumanCreate } from '../human';
 import { HumanService } from '../human.service';
 
 @Component({
@@ -9,9 +10,21 @@ import { HumanService } from '../human.service';
 })
 export class HumanManagerComponent {
 
-  constructor(private readonly humanService:HumanService) { }
+  public humans$!: Observable<Human[]>;
+  
+  constructor(private readonly humanService:HumanService) {
+    this.humans$ = this.humanService.Humans$
+  }
 
   public onHuman(human: HumanCreate): void {
     this.humanService.add(human);
   }
+
+  public onDelete(human:Human){
+    this.humanService.deleteByObject(human);
+  }
+
+
+
+
 }

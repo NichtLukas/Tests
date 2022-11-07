@@ -18,7 +18,7 @@ export class HumanService {
     this.humans$ = new BehaviorSubject<Human[]>([]);
   }
 
-  public getHumans$():Observable<Human[]>{
+  public get Humans$():Observable<Human[]>{
     return this.humans$.asObservable();
   }
 
@@ -28,9 +28,8 @@ export class HumanService {
   }
 
   public deleteByObject(human: Human): void{
-    const humans: Human[] = this.humans$.value;
-    //humans.find((humanCopy) => humanCopy.uuid == human.uuid)
-    humans.splice(humans.indexOf(human));
+    let humans: Human[] = this.humans$.value;
+    humans = humans.filter((humanCopy) => humanCopy.uuid !== human.uuid)
     this.humans$.next(humans);
   }
 

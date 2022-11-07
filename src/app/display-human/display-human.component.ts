@@ -1,7 +1,6 @@
-import { ChangeDetectionStrategy, Component, ViewChild } from '@angular/core';
-import { MatTable } from '@angular/material/table';
+import { Component, EventEmitter, Input, Output} from '@angular/core';
+import { Observable } from 'rxjs';
 import { Human } from '../human';
-import { HumanService } from '../human.service';
 
 @Component({
   selector: 'app-display-human',
@@ -12,25 +11,22 @@ import { HumanService } from '../human.service';
 
 //TODO umbennen in list view z.b. 
 // Grid und List view machen und mit einem Switch die darstellung ändern 
-export class DisplayHumanComponent{
-  @ViewChild(MatTable)
-  table!: MatTable<Human>;
-  ELEMENT_DATA:Human[] = [];
+export class DisplayHumanComponent{ // HumanListComponent HumanGridComponent
   displayedColumns: string[] = ['name', 'age', 'options'];
+  tabelVlaue: Human[] = []
   
+  @Input() public humans:Observable<Human[]> = new Observable<Human[]>; // humans
+  @Output() public delete = new EventEmitter<Human>();
 
-  constructor(private humanService:HumanService) { 
-    this.humanService.getHumans$()
-    .subscribe((data:Human[]) =>{
-      this.ELEMENT_DATA = data;
-      this.table.renderRows();//TODO: updating table after delete not possible without renderrows -> figure out why
-    }
-     );
+  constructor(){
+    this.humans.subscribe(humans => this.tabelVlaue = humans);
   }
 
-  public deleteHuman(human:Human):void{
-    this.humanService.deleteByObject(human);
+  public onDelete(human:Human):void{
+    this.delete.emit(human);
   }
 
 
 }
+
+                      
