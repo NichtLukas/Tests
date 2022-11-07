@@ -10,12 +10,7 @@ import { MatIconModule } from '@angular/material/icon';
 @Component({
   selector: 'app-create-human',
   templateUrl: './create-human.component.html',
-  // stlyes oder style-urls
-  styles:[`
-    mat-form-field {
-      width: 100%;
-    }
-  `],
+  styleUrls: ['./create-human.component.css'],
   standalone: true,
   imports: [
     CommonModule,

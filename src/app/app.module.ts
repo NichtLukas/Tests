@@ -13,13 +13,14 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import { HumanManagerComponent } from './human-manager/human-manager.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     DisplayHumanComponent,
-    HumanManagerComponent
+    HumanManagerComponent,
   ],
   imports: [
     BrowserModule,
@@ -30,7 +31,8 @@ import { HumanManagerComponent } from './human-manager/human-manager.component';
     FormsModule,
     MatButtonModule,
     MatTableModule,
-    CreateHumanComponent
+    CreateHumanComponent,
+    ToolbarComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

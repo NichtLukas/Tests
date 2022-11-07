@@ -1,10 +1,7 @@
 
 <div class="human-wrapper">
-    <!-- strg + # -->
-    <app-create-human (human)="onHuman($event)">
+    <app-create-human (human)="onHuman($event)" class="create-human">
     </app-create-human>
-    <app-display-human [humans]="humans$" (delete)="onDelete($event)"></app-display-human>
-
-    <!-- tabellenspalte auswählen und zurück geben -->
-
+    <app-display-human [humans]="humans$" (delete)="onDelete($event)" class="display-human">
+    </app-display-human>
 </div>
