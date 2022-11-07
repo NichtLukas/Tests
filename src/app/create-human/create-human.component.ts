@@ -45,7 +45,7 @@ export class CreateHumanComponent implements OnInit {
   }
 
   public readFormKeyInput(event:any): void{
-    this.autoSaveHumanForm();
+    //this.autoSaveHumanForm();
     if (!(event.keyCode === Keycodes.ENTER)) return;
     this.sendFormValue();
   }
