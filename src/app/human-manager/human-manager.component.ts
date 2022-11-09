@@ -16,14 +16,13 @@ export class HumanManagerComponent {
     this.humans$ = this.humanService.Humans$
   }
 
-  public onHuman(human: HumanCreate): void {
+  public onAdd(human: HumanCreate): void {
     this.humanService.add(human);
   }
 
   public onDelete(human:Human){
     this.humanService.deleteByObject(human);
   }
-
 
 
 
