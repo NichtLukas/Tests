@@ -1,12 +1,16 @@
 import { TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppComponent } from './app.component';
+import { CreateHumanComponent } from './create-human/create-human.component';
+import { ToolbarComponent } from './toolbar/toolbar.component';
 
 describe('AppComponent', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [
-        RouterTestingModule
+        RouterTestingModule,
+        CreateHumanComponent,
+        ToolbarComponent
       ],
       declarations: [
         AppComponent
@@ -14,4 +18,7 @@ describe('AppComponent', () => {
     }).compileComponents();
   });
 
+  it('should create', () => {
+    expect(AppComponent).toBeTruthy();
+  });
 });

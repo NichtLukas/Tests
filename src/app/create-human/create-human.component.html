@@ -1,4 +1,5 @@
-<form [formGroup]="form" (keydown)="readFormKeyInput($event)" class="form" >
+<!--  -->
+<form [formGroup]="form" class="form" (keydown)="readFormKeyInput()">
   <mat-form-field appearance="fill" >
     <mat-label>Name</mat-label>
     <input matInput type="text" formControlName="name">
@@ -16,6 +17,9 @@
     <button matSuffix mat-icon-button (click)="ageFormControl.reset()">
       <mat-icon>close</mat-icon>
     </button>
+    <mat-error *ngIf="nameFormControl.hasError('required')">
+      This is required!
+    </mat-error>
   </mat-form-field>
   
 </form>

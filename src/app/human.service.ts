@@ -13,27 +13,28 @@ export class HumanService {
 
   //_ = Private 
   //$ = BehaviorSubject
-  private readonly humans$: BehaviorSubject<Human[]>
+  private readonly _humans$: BehaviorSubject<Human[]>
 
   constructor() { 
-    this.humans$ = new BehaviorSubject<Human[]>([]);
-    //TODO: Nur für Mock zuständig
-    this.humans$.next(HUMAN_LIST_MOCK)
+    this._humans$ = new BehaviorSubject<Human[]>(HUMAN_LIST_MOCK);
   }
 
-  public get Humans$():Observable<Human[]>{
-    return this.humans$.asObservable();
+  public get humans$():Observable<Human[]>{
+    return this._humans$.asObservable();
   }
 
-  public add(human: HumanCreate): void{
-    const uuid = uuidv4();
-    this.humans$.next([...this.humans$.value, {...human, uuid}]);
+  public add(createHuman: HumanCreate): void{
+    const uuid: string = uuidv4();
+    const human: Human = {...createHuman, uuid};
+    
+    this._humans$.next([...this._humans$.value, human]);
   }
 
   public deleteByObject(human: Human): void{
-    let humans: Human[] = this.humans$.value;
-    humans = humans.filter((humanCopy) => humanCopy.uuid !== human.uuid)
-    this.humans$.next(humans);
+    let humans: Human[] = this._humans$.value
+      .filter((humanCopy) => humanCopy.uuid !== human.uuid);
+
+    this._humans$.next(humans);
   }
 
 }

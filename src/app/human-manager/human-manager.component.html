@@ -2,6 +2,7 @@
 <div class="human-wrapper">
     <app-create-human (human)="onAdd($event)" class="create-human">
     </app-create-human>
-    <app-display-human [humans]="humans$" (delete)="onDelete($event)" class="display-human">
+    <!-- das  "|  async" liest und transformiert das Observable in eine Variable-->
+    <app-display-human [humans]="(humans$ | async) || []" (delete)="onDelete($event)" class="display-human">
     </app-display-human>
 </div>

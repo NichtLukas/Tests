@@ -10,17 +10,15 @@ import { HumanService } from '../human.service';
 })
 export class HumanManagerComponent {
 
-  public humans$!: Observable<Human[]>;
+  public humans$: Observable<Human[]> = this.humanService.humans$;
   
-  constructor(private readonly humanService:HumanService) {
-    this.humans$ = this.humanService.Humans$
-  }
+  constructor(private readonly humanService: HumanService) {}
 
   public onAdd(human: HumanCreate): void {
     this.humanService.add(human);
   }
 
-  public onDelete(human:Human){
+  public onDelete(human:Human): void{
     this.humanService.deleteByObject(human);
   }
 
