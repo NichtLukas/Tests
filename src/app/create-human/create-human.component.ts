@@ -47,13 +47,19 @@ export class CreateHumanComponent implements OnInit, OnDestroy {
     this.initializeFormObservers();
   }
 
-  ngOnDestroy(): void {
+  public ngOnDestroy(): void {
     this._destroyed$.next();
     this._destroyed$.complete();
   }
 
   public readFormKeyInput(): void{
     this._form$.next(this.form)
+  }
+  
+  public emitFormValue():void{
+    if(this.form.invalid) return;
+    this.humanEmitter.emit(this.form.value);
+    this.form.reset();
   }
 
   private initializeForm(): void {
@@ -66,23 +72,8 @@ export class CreateHumanComponent implements OnInit, OnDestroy {
       takeUntil(this._destroyed$),
       debounceTime(5000)
       ).subscribe((data) =>{
-      if(data.invalid) return;
-      this.sendFormValue();
+      this.emitFormValue();
     });
   }
 
-  private sendFormValue():void{
-    this.humanEmitter.emit(this.form.value);
-    this.form.reset();
-  }
-
-
 }
-
-// https://www.learnrxjs.io/learn-rxjs/operators/filtering/debouncetime
-
-/**
- * TODO:
- * 1. sibscription auf form
- * 2. on valuechange and valid form execute
- */
