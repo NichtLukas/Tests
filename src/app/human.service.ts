@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Human, HumanCreate } from './human';
 import { v4 as uuidv4 } from 'uuid';
+import { HUMAN_LIST_MOCK } from './mocks/human-mocks';
 
 
 
@@ -16,6 +17,8 @@ export class HumanService {
 
   constructor() { 
     this.humans$ = new BehaviorSubject<Human[]>([]);
+    //TODO: Nur für Mock zuständig
+    this.humans$.next(HUMAN_LIST_MOCK)
   }
 
   public get Humans$():Observable<Human[]>{
