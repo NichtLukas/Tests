@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component} from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
 import {MatToolbarModule} from '@angular/material/toolbar';
 
@@ -15,11 +15,6 @@ import {MatToolbarModule} from '@angular/material/toolbar';
     MatToolbarModule
   ]
 })
-export class ToolbarComponent implements OnInit {
-
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+export class ToolbarComponent {
+  public title:string = "Human Manager";
 }

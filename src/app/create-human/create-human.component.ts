@@ -1,12 +1,11 @@
 import { Component, EventEmitter, OnInit, Output, OnDestroy} from '@angular/core';
-import { Keycodes } from '../keycodes';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { HumanCreate } from '../human';
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { BehaviorSubject, debounce, debounceTime, fromEvent, Subject, takeUntil } from 'rxjs';
+import { BehaviorSubject, debounceTime, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-create-human',
@@ -28,9 +27,8 @@ export class CreateHumanComponent implements OnInit, OnDestroy {
     age: new FormControl<number|null>(null, [Validators.required]),
   });
 
-  private readonly _form$: BehaviorSubject<FormGroup>;
+  private readonly _form$: BehaviorSubject<FormGroup>  = new BehaviorSubject<FormGroup>(this.form);
   private readonly _destroyed$ = new Subject<void>();
-
 
 
   // Auf die Werte im Form zugreifen
@@ -43,10 +41,6 @@ export class CreateHumanComponent implements OnInit, OnDestroy {
   }
 
   @Output('human') public humanEmitter = new EventEmitter<HumanCreate>();
-
-  constructor(){
-    this._form$ = new BehaviorSubject<FormGroup>(this.form);
-  }
 
   public ngOnInit(): void {
     this.initializeForm();
@@ -75,10 +69,8 @@ export class CreateHumanComponent implements OnInit, OnDestroy {
       if(data.invalid) return;
       this.sendFormValue();
     });
-    
   }
 
-  //TODO: kann vieleicht weg?
   private sendFormValue():void{
     this.humanEmitter.emit(this.form.value);
     this.form.reset();

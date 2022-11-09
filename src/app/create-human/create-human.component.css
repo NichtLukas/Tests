@@ -1,6 +1,15 @@
 .form{
-    margin-left: 35%;
-    width: 30%;
+    margin-top: 20px;
+    margin-left: 5%;
+    /* max(MINIMUM, min(PREFERRED, MAXIMUM)) */
+    width: max(450px, 50%);
     display: flex;
-    justify-content:space-around;
+    justify-content:space-between;
+}
+.formfield{
+    box-sizing: border-box;
+    width: max(10%,40%);
+}
+button{
+    height: 50px;
 }
