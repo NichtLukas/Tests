@@ -1,11 +1,13 @@
 import { Component, EventEmitter, OnInit, Output, OnDestroy} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { HumanCreate } from '../human';
+import { DEFAULT_HUMAN, HumanCreate } from '../human';
+import { BehaviorSubject, debounceTime, Subject, takeUntil } from 'rxjs';
+
 import { CommonModule } from '@angular/common';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
-import { BehaviorSubject, debounceTime, Subject, takeUntil } from 'rxjs';
+
 
 @Component({
   selector: 'app-create-human',
@@ -18,7 +20,9 @@ import { BehaviorSubject, debounceTime, Subject, takeUntil } from 'rxjs';
     MatInputModule,
     MatButtonModule,
     MatIconModule,
+
   ],
+
 })
 export class CreateHumanComponent implements OnInit, OnDestroy {
   // TODO: create typed FormGroup
@@ -63,8 +67,8 @@ export class CreateHumanComponent implements OnInit, OnDestroy {
   }
 
   private initializeForm(): void {
-    this.ageFormControl.patchValue(18);
-    this.nameFormControl.patchValue('Max Mustermann');
+    this.ageFormControl.patchValue(DEFAULT_HUMAN.age);
+    this.nameFormControl.patchValue(DEFAULT_HUMAN.name);
   }
 
   private initializeFormObservers() {

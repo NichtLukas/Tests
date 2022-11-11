@@ -22,8 +22,5 @@ export class DisplayHumanComponent { // HumanListComponent HumanGridComponent
   public onDelete(human:Human):void{
     this.delete.emit(human);
   }
-
-
 }
-
-                      
+    

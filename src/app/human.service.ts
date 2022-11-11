@@ -23,18 +23,19 @@ export class HumanService {
     return this._humans$.asObservable();
   }
 
-  public add(createHuman: HumanCreate): void{
+  public add(createHuman: HumanCreate): Human{
     const uuid: string = uuidv4();
     const human: Human = {...createHuman, uuid};
     
     this._humans$.next([...this._humans$.value, human]);
+    return human;
   }
 
   public deleteByObject(human: Human): void{
     let humans: Human[] = this._humans$.value
       .filter((humanCopy) => humanCopy.uuid !== human.uuid);
-
     this._humans$.next(humans);
+
   }
 
 }
