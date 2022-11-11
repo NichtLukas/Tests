@@ -1,26 +1,11 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { ToolbarComponent } from './toolbar.component';
+import {render, screen, fireEvent} from '@testing-library/angular'
 
 describe('ToolbarComponent', () => {
-  let component: ToolbarComponent;
-  let fixture: ComponentFixture<ToolbarComponent>;
+  it('should render ToolbarComponent', async ()=>{
+    await render(ToolbarComponent)
+    // expect(screen.getByText('Human Manager')).toBeInTheDocument();
+    expect(screen.getByText('Human Manager')).not.toBeUndefined();
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [  ],
-      imports:[
-        ToolbarComponent
-      ]
-    })
-    .compileComponents();
-
-    fixture = TestBed.createComponent(ToolbarComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
+  })
 });
