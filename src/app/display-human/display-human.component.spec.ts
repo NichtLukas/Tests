@@ -1,5 +1,6 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DisplayHumanComponent } from './display-human.component';
+import { Human } from '../human';
 
 describe('DisplayHumanComponent', () => {
   let component: DisplayHumanComponent;

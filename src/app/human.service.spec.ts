@@ -20,7 +20,7 @@ describe('HumanService', () => {
     expect(service.humans$).toBeInstanceOf(Observable<Human[]>);
   })
 
-  it('#add should transfrom createHuman to Human an uuid', () =>{
+  it('#add should transfrom createHuman to Human and add uuid', () =>{
     let human:Human = service.add(DEFAULT_HUMAN_CREATE);
     const REGEX_UUID: RegExp = /^[0-9a-fA-F]{8}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{4}\b-[0-9a-fA-F]{12}$/;
     expect(REGEX_UUID.test(human.uuid)).toBeTrue();
