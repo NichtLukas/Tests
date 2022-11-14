@@ -1,3 +1,5 @@
+import { FormControl } from "@angular/forms"
+
 export interface Human{
     uuid:string,
     name:string,
@@ -7,6 +9,12 @@ export interface Human{
 export interface HumanCreate {
     name: string,
     age: number,
+}
+
+export interface HumanCreateForm {
+    name: FormControl<string|null>
+    age: FormControl<number|null>,
+
 }
 
 //Naming Uppercase?

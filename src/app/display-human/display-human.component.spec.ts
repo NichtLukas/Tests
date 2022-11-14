@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { DisplayHumanComponent } from './display-human.component';
-import { Human } from '../human';
+import {MatTableModule} from '@angular/material/table';
+import { CommonModule } from '@angular/common';
+import { BrowserModule } from '@angular/platform-browser';
+import { MatIconModule } from '@angular/material/icon';
 
 describe('DisplayHumanComponent', () => {
   let component: DisplayHumanComponent;
@@ -12,6 +15,10 @@ describe('DisplayHumanComponent', () => {
         DisplayHumanComponent
       ],
       imports:[
+        MatTableModule,
+        CommonModule,
+        BrowserModule,
+        MatIconModule,
       ]
     })
     .compileComponents();

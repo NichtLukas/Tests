@@ -1,6 +1,6 @@
 import { Component, EventEmitter, OnInit, Output, OnDestroy} from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { DEFAULT_HUMAN, HumanCreate } from '../human';
+import { DEFAULT_HUMAN, HumanCreate, HumanCreateForm } from '../human';
 import { BehaviorSubject, debounceTime, Subject, takeUntil } from 'rxjs';
 
 import { CommonModule } from '@angular/common';
@@ -25,8 +25,7 @@ import { MatIconModule } from '@angular/material/icon';
 
 })
 export class CreateHumanComponent implements OnInit, OnDestroy {
-  // TODO: create typed FormGroup
-  public readonly form: FormGroup = new FormGroup /*<HumanCreate>*/({
+  public readonly form: FormGroup = new FormGroup <HumanCreateForm>({
     name: new FormControl<string|null>(null, [Validators.required]),
     age: new FormControl<number|null>(null, [Validators.required]),
   });

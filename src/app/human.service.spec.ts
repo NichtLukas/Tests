@@ -14,10 +14,12 @@ describe('HumanService', () =>{
   
   it('#humans$ should return an Observable of humans', () =>{
     expect(service.humans$).toBeInstanceOf(Observable)
-    service.humans$.subscribe((humans:Human[])=>{
-      expect(humans).toBeInstanceOf(Array);
-      //expect(humans).toMatchObject<Human>; TODO: Typsierung
+    let humans: Human[]|undefined;
+    service.humans$.subscribe((find:Human[])=>{
+      humans = find;
     });
+    expect(humans).toBeInstanceOf(Array);
+
   });
 
   it('should be created', () => {
@@ -32,24 +34,26 @@ describe('HumanService', () =>{
   });
 
   it('#add should put human in _humans$', ()=>{
+    let didFind:Human|undefined;
     const HUMAN:Human = service.add(DEFAULT_HUMAN_CREATE);
     service.humans$.subscribe((humans:Human[])=>{
-      let didFind:Human | undefined = humans.find((searchHuman:Human) =>{
+        didFind = humans.find((searchHuman:Human) =>{
         return searchHuman.uuid === HUMAN.uuid  
       });
-      expect(didFind).not.toBeUndefined();
     });
+    expect(didFind).toBeDefined()
   });
 
   it('#deleteByObject should delete an human from humans$',() =>{
     const HUMAN:Human = service.add(DEFAULT_HUMAN_CREATE);
+    let didFind:Human | undefined
     service.deleteByObject(HUMAN);
     service.humans$.subscribe((humans:Human[])=>{
-        let didFind:Human | undefined = humans.find((searchHuman:Human) =>{
+        didFind = humans.find((searchHuman:Human) =>{
         return searchHuman.uuid === HUMAN.uuid  
       });
-      expect(didFind).toBeUndefined()
     });
+    expect(didFind).toBeUndefined()
   });
 
 });

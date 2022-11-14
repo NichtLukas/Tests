@@ -14,6 +14,7 @@ import {MatButtonModule} from '@angular/material/button';
 import {MatTableModule} from '@angular/material/table';
 import { HumanManagerComponent } from './human-manager/human-manager.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
+import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -32,7 +33,8 @@ import { ToolbarComponent } from './toolbar/toolbar.component';
     MatButtonModule,
     MatTableModule,
     CreateHumanComponent,
-    ToolbarComponent
+    ToolbarComponent,
+    CommonModule
   ],
   providers: [],
   bootstrap: [AppComponent]
