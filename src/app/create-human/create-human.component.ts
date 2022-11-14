@@ -1,12 +1,8 @@
 import { Component, EventEmitter, OnInit, Output, OnDestroy} from '@angular/core';
-import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DEFAULT_HUMAN, HumanCreate, HumanCreateForm } from '../human';
 import { BehaviorSubject, debounceTime, Subject, takeUntil } from 'rxjs';
-
-import { CommonModule } from '@angular/common';
-import { MatInputModule } from '@angular/material/input';
-import { MatButtonModule } from '@angular/material/button';
-import { MatIconModule } from '@angular/material/icon';
+import { AngularMaterialModule } from './create-human.module';
 
 
 @Component({
@@ -15,12 +11,7 @@ import { MatIconModule } from '@angular/material/icon';
   styleUrls: ['./create-human.component.css'],
   standalone: true,
   imports: [
-    CommonModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatButtonModule,
-    MatIconModule,
-
+    AngularMaterialModule,
   ],
 
 })
