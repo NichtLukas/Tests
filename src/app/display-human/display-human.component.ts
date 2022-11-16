@@ -1,10 +1,15 @@
 import { Component, EventEmitter, Input, Output} from '@angular/core';
 import { Human } from '../human';
+import { AngularMaterialModuleDisplayHuman } from './display-human.module';
 
 @Component({
+  standalone: true,
   selector: 'app-display-human',
   templateUrl: './display-human.component.html',
   styleUrls: ['./display-human.component.css'],
+  imports:[
+    AngularMaterialModuleDisplayHuman,
+  ]
 
 })
 

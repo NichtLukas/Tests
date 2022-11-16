@@ -2,7 +2,7 @@ import { Component, EventEmitter, OnInit, Output, OnDestroy} from '@angular/core
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { DEFAULT_HUMAN, HumanCreate, HumanCreateForm } from '../human';
 import { BehaviorSubject, debounceTime, Subject, takeUntil } from 'rxjs';
-import { AngularMaterialModule } from './create-human.module';
+import { AngularMaterialModuleCreateHuman } from './create-human.module';
 
 
 @Component({
@@ -11,7 +11,7 @@ import { AngularMaterialModule } from './create-human.module';
   styleUrls: ['./create-human.component.css'],
   standalone: true,
   imports: [
-    AngularMaterialModule,
+    AngularMaterialModuleCreateHuman,
   ],
 
 })
