@@ -1,6 +1,6 @@
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
-import { Human, DEFAULT_HUMAN_CREATE, DEFAULT_HUMAN } from './human';
+import { DEFAULT_HUMAN_CREATE, Human } from './human.model';
 import { HumanService } from './human.service';
 
 

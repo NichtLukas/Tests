@@ -1,7 +1,7 @@
 import { Component, EventEmitter, OnDestroy, OnInit, Output } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { BehaviorSubject, debounceTime, Subject, takeUntil } from 'rxjs';
-import { DEFAULT_HUMAN, HumanCreate, HumanCreateForm } from './human.model';
+import { HumanCreate, HumanCreateForm } from './human.model';
 
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -109,8 +109,8 @@ export class CreateHumanComponent implements OnInit, OnDestroy {
   }
 
   private initializeForm(): void {
-    this.ageFormControl.patchValue(DEFAULT_HUMAN.age);
-    this.nameFormControl.patchValue(DEFAULT_HUMAN.name);
+    // this.ageFormControl.patchValue(DEFAULT_HUMAN.age);
+    // this.nameFormControl.patchValue(DEFAULT_HUMAN.name);
   }
 
   private initializeFormObservers() {
@@ -119,6 +119,7 @@ export class CreateHumanComponent implements OnInit, OnDestroy {
       debounceTime(5000)
       ).subscribe((data) =>{
       this.emitFormValue();
+      
     });
   }
 

@@ -16,19 +16,45 @@ export class HumanService {
   //$ = BehaviorSubject
   private readonly _humans$: BehaviorSubject<Human[]>
 
+
   constructor(private http: HttpClient) { 
     this._humans$ = new BehaviorSubject<Human[]>([]);
   }
 
   public get humans$():Observable<Human[]>{
-    return this.http.get<Human[]>(`${environment.api}/humans`);
+    return this._humans$.asObservable();
   }
+
+  public load(){
+    this.http.get<Human[]>(`${environment.api}/humans`).subscribe({
+      next: (humans:Human[]) => {
+        this._humans$.next(humans);
+      },
+      error: (error:Error) =>{
+        console.log(error.message);
+      }
+    });
+  }
+
+  // public loadHumansFromServer(destroy:Subject<void>):Observable<Human[]>{
+  //   return  this.http.get<Human[]>(`${environment.api}/humans`)
+  //   .pipe(takeUntil(destroy));
+  // }
+
+
+  // public loadHumansFromServer(){
+  //   this.http.get<Human[]>(`${environment.api}/humans`)
+  // }
 
   public add(createHuman: HumanCreate): Human{
     const uuid: string = uuidv4();
-    const human: Human = {...createHuman, uuid};
+    const human: Human = {uuid,...createHuman};
+
+    this.http.post<Human>(`${environment.api}/humans`,human).
+    subscribe((response)=>{
+      console.log(response);
+    });
     
-    this._humans$.next([...this._humans$.value, human]);
     return human;
   }
 
