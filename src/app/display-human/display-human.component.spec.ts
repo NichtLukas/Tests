@@ -1,34 +1,78 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+
+import { render, RenderResult, screen } from '@testing-library/angular';
+import '@testing-library/jest-dom/extend-expect';
+import { Human } from '../human/human.model';
+import { HumanService } from '../human/human.service';
 import { DisplayHumanComponent } from './display-human.component';
-import {MatTableModule} from '@angular/material/table';
-import { CommonModule } from '@angular/common';
-import { BrowserModule } from '@angular/platform-browser';
-import { MatIconModule } from '@angular/material/icon';
+import { AngularMaterialModuleDisplayHuman } from './display-human.module';
 
-describe('DisplayHumanComponent', () => {
-  let component: DisplayHumanComponent;
-  let fixture: ComponentFixture<DisplayHumanComponent>;
 
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [  
-        DisplayHumanComponent
-      ],
-      imports:[
-        MatTableModule,
-        CommonModule,
-        BrowserModule,
-        MatIconModule,
-      ]
-    })
-    .compileComponents();
 
-    fixture = TestBed.createComponent(DisplayHumanComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+describe('DisplayHumanComponent with fireEvent', ()=>{
+  let rendered:RenderResult<DisplayHumanComponent, DisplayHumanComponent>
+  let submitSpy: jest.Mock<any,any>
+  let humanService: HumanService;
+
+  beforeEach(async () =>{
+    submitSpy = jest.fn();
+    humanService = new HumanService;
+    rendered = await render(DisplayHumanComponent, {
+      imports:[AngularMaterialModuleDisplayHuman,],
+      componentProperties:{
+        onDelete:submitSpy,
+      }
+    });
+ 
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should delete Human from table after clicking on delete', async () =>{
+    let humans:Human[] = [];
+    let humanID = '';
+    humanService.humans$.subscribe((value:Human[])=>{
+      humans = value; 
+    });
+    expect(humans).not.toBe([]);
+
+    humanID = 'delete:' + humans[0].uuid;
+
+    //TODO: right GET
+
+    //const deleteButton = screen.(humanID);
+    //fireEvent.click(deleteButton);
+
+    expect(submitSpy).toBeCalled();
+    
+    expect(screen.getByText(humanID)).not.toBeInTheDocument();
+
   });
+
+
+
 });
+
+describe('DisplayHumanComponent without fireEvent', ()=>{
+
+  let rendered:RenderResult<DisplayHumanComponent, DisplayHumanComponent>
+
+  beforeEach(async () =>{
+    rendered = await render(DisplayHumanComponent, {
+      imports:[AngularMaterialModuleDisplayHuman,]
+    });
+  });
+
+  it('should render DisplayHumanComponent', async () =>{
+    expect(screen.getByText('Name')).toBeInTheDocument();
+    expect(screen.getByText('Age')).toBeInTheDocument();
+    expect(screen.getByText('Options')).toBeInTheDocument();
+
+  });
+  it('should show new added Humans in table', async () =>{
+    
+  });
+
+  it('should show all information about one Humans in the right row', async () =>{
+    
+  });
+
+});
+

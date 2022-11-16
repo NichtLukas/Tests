@@ -1,8 +1,9 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Human, HumanCreate } from './human';
+import { environment } from 'src/environments/environment';
 import { v4 as uuidv4 } from 'uuid';
-import { HUMAN_LIST_MOCK } from './mocks/human-mocks';
+import { Human, HumanCreate } from './human.model';
 
 
 
@@ -15,12 +16,12 @@ export class HumanService {
   //$ = BehaviorSubject
   private readonly _humans$: BehaviorSubject<Human[]>
 
-  constructor() { 
-    this._humans$ = new BehaviorSubject<Human[]>(HUMAN_LIST_MOCK);
+  constructor(private http: HttpClient) { 
+    this._humans$ = new BehaviorSubject<Human[]>([]);
   }
 
   public get humans$():Observable<Human[]>{
-    return this._humans$.asObservable();
+    return this.http.get<Human[]>(`${environment.api}/humans`);
   }
 
   public add(createHuman: HumanCreate): Human{

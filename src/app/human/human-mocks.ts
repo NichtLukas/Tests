@@ -1,5 +1,5 @@
-import { Human } from "../human";
 import { v4 as uuidv4 } from 'uuid';
+import { Human } from "./human.model";
 
 export const HUMAN_LIST_MOCK:Human[] = [
     {uuid:uuidv4(),name:"Lukas Bode",age:22},

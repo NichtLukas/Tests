@@ -1,6 +1,8 @@
-import { Component, EventEmitter, Input, Output} from '@angular/core';
-import { Human } from '../human';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Human } from '../human/human.model';
 import { AngularMaterialModuleDisplayHuman } from './display-human.module';
+
+
 
 @Component({
   standalone: true,
@@ -17,7 +19,7 @@ import { AngularMaterialModuleDisplayHuman } from './display-human.module';
 export class DisplayHumanComponent { // HumanListComponent HumanGridComponent
   displayedColumns: string[] = ['name', 'age', 'options'];
   
-  @Input() public humans: Human[] = []; // humans
+  @Input() public humans: Human[] = []; 
   @Output() public delete = new EventEmitter<Human>();
 
   public onDelete(human:Human):void{

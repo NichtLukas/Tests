@@ -1,7 +1,7 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Human, HumanCreate } from '../human';
-import { HumanService } from '../human.service';
+import { Human, HumanCreate } from '../human/human.model';
+import { HumanService } from '../human/human.service';
 
 @Component({
   selector: 'app-human-manager',

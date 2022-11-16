@@ -1,15 +1,16 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CreateHumanComponent } from './create-human/create-human.component';
 import { DisplayHumanComponent } from './display-human/display-human.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { CreateHumanComponent } from './human/create-human.component';
 
+import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { HumanManagerComponent } from './human-manager/human-manager.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
-import { CommonModule } from '@angular/common';
 
 
 @NgModule({
@@ -26,6 +27,7 @@ import { CommonModule } from '@angular/common';
     AppRoutingModule,
     BrowserAnimationsModule,
     CommonModule,
+    HttpClientModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

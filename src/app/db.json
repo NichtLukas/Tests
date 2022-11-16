@@ -1,0 +1,8 @@
+{
+    "humans":[
+        {"uuid":"3bfe5688-b3b0-4e62-bc18-db8bf8a9005b","name":"Lukas Bode","age":22},
+        {"uuid":"2bdcf29f-dc72-46e0-921e-f8efcb78ea34","name":"Wilhelm Sauerwald","age":30},
+        {"uuid":"3f10cf19-4be3-446c-8013-0af71647d62a","name":"Yannic Wetzel","age":31},
+        {"uuid":"75f4e2c0-8597-44cf-9605-38edaccaf660","name":"Lukas Walter","age":22}
+    ]
+}

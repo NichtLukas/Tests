@@ -1,10 +1,9 @@
+import { fireEvent, render, RenderResult, screen } from '@testing-library/angular';
+import '@testing-library/jest-dom/extend-expect';
 import { CreateHumanComponent } from './create-human.component';
-import {render, screen, fireEvent, RenderResult} from '@testing-library/angular'
-import '@testing-library/jest-dom/extend-expect'
-import { AngularMaterialModule } from './create-human.module';
+
 
 describe('CreateHumanComponent with Forms', ()=>{
-  
   let inputName:HTMLElement;
   let inputAge:HTMLElement;
   let inputAgeReset:HTMLElement;
@@ -15,8 +14,8 @@ describe('CreateHumanComponent with Forms', ()=>{
   beforeEach(async()=>{
     
     submitSpy = jest.fn();
-    rendered =await render(CreateHumanComponent, {
-      imports:[ AngularMaterialModule,],
+    rendered = await render(CreateHumanComponent, {
+      
       componentProperties:{
         emitFormValue:submitSpy,
     }});
@@ -59,8 +58,7 @@ describe('CreateHumanComponent without Forms', () => {
 //     const inputAge = rendered.getByLabelText('ageInput');
 
   beforeEach(async()=>{
-      rendered =await render(CreateHumanComponent, {
-      imports:[ AngularMaterialModule,]});
+      rendered =await render(CreateHumanComponent,);
       inputName = rendered.getByLabelText('nameInput');
       inputNameReset = rendered.getByLabelText('nameInputReset');
       inputAge = rendered.getByLabelText('ageInput');
