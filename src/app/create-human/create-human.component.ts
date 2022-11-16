@@ -50,10 +50,11 @@ export class CreateHumanComponent implements OnInit, OnDestroy {
     this._form$.next(this.form)
   }
   
-  public emitFormValue():void{
-    if(this.form.invalid) return;
+  public emitFormValue():boolean{
+    if(this.form.invalid) return false;
     this.humanEmitter.emit(this.form.value);
     this.form.reset();
+    return true;
   }
 
   private initializeForm(): void {
