@@ -1,14 +1,18 @@
 import { CommonModule } from '@angular/common';
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
 import { MatIconModule } from '@angular/material/icon';
-import {MatToolbarModule} from '@angular/material/toolbar';
+import { MatToolbarModule } from '@angular/material/toolbar';
 
 
 @Component({
   standalone: true,
   selector: 'app-toolbar',
-  templateUrl: './toolbar.component.html',
-  styleUrls: ['./toolbar.component.css'],
+  template: `
+  <mat-toolbar class="toolbar">
+    <span>{{title}}</span>
+  </mat-toolbar>
+  `,
+  styles:[`.toolbar{background-color: dimgray;}`],
   imports:[
     CommonModule,
     MatIconModule,

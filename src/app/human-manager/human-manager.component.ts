@@ -18,9 +18,6 @@ export class HumanManagerComponent implements OnInit {
     this.humanService.load();
   }
 
-  
-
-
   public onAdd(human: HumanCreate): void {
     this.humanService.add(human);
     this.humanService.load();

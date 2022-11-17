@@ -36,17 +36,7 @@ export class HumanService {
       }
     });
   }
-
-  // public loadHumansFromServer(destroy:Subject<void>):Observable<Human[]>{
-  //   return  this.http.get<Human[]>(`${environment.api}/humans`)
-  //   .pipe(takeUntil(destroy));
-  // }
-
-
-  // public loadHumansFromServer(){
-  //   this.http.get<Human[]>(`${environment.api}/humans`)
-  // }
-
+  
   public add(createHuman: HumanCreate): void{
     this.http.post<HumanCreate>(`${environment.api}/humans`,createHuman).
     subscribe((response)=>{
@@ -60,4 +50,13 @@ export class HumanService {
     })
   }
 
+    // public loadHumansFromServer(destroy:Subject<void>):Observable<Human[]>{
+  //   return  this.http.get<Human[]>(`${environment.api}/humans`)
+  //   .pipe(takeUntil(destroy));
+  // }
+
+
+  // public loadHumansFromServer(){
+  //   this.http.get<Human[]>(`${environment.api}/humans`)
+  // }
 }
