@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { v4 as uuidv4 } from 'uuid';
 import { Human, HumanCreate } from './human.model';
 
 
@@ -26,7 +25,9 @@ export class HumanService {
   }
 
   public load(){
-    this.http.get<Human[]>(`${environment.api}/humans`).subscribe({
+
+    this.http.get<Human[]>(`${environment.api}/humans`)
+    .subscribe({
       next: (humans:Human[]) => {
         this._humans$.next(humans);
       },
@@ -46,25 +47,17 @@ export class HumanService {
   //   this.http.get<Human[]>(`${environment.api}/humans`)
   // }
 
-  public add(createHuman: HumanCreate): Human{
-    const uuid: string = uuidv4();
-    const human: Human = {uuid,...createHuman};
-
-    this.http.post<Human>(`${environment.api}/humans`,human).
+  public add(createHuman: HumanCreate): void{
+    this.http.post<HumanCreate>(`${environment.api}/humans`,createHuman).
     subscribe((response)=>{
       console.log(response);
     });
-    
-    return human;
   }
 
   public deleteByObject(human: Human): void{
-    this.http.delete(`${environment.api}/humans/${human.uuid}`).subscribe(()=>{
+    this.http.delete(`${environment.api}/humans/${human.id}`)
+    .subscribe(()=>{
     })
-    let humans: Human[] = this._humans$.value
-      .filter((humanCopy) => humanCopy.uuid !== human.uuid);
-    this._humans$.next(humans);
-
   }
 
 }

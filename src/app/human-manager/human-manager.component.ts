@@ -28,6 +28,7 @@ export class HumanManagerComponent implements OnInit {
 
   public onDelete(human:Human): void{
     this.humanService.deleteByObject(human);
+    this.humanService.load();
   }
 
 

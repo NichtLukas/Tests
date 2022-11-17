@@ -1,7 +1,7 @@
 import { FormControl } from "@angular/forms"
 
 export interface Human{
-    uuid:string,
+    id:number,
     name:string,
     age:number,
 }
@@ -24,7 +24,7 @@ export const DEFAULT_HUMAN_CREATE:HumanCreate = {
 }
 
 export const DEFAULT_HUMAN:Human = {
-    uuid: "af7c1fe6-d669-414e-b066-e9733f0de7a8",
+    id: 100,
     name: "Max Mustermann",
     age: 18,
 }
