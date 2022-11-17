@@ -59,6 +59,8 @@ export class HumanService {
   }
 
   public deleteByObject(human: Human): void{
+    this.http.delete(`${environment.api}/humans/${human.uuid}`).subscribe(()=>{
+    })
     let humans: Human[] = this._humans$.value
       .filter((humanCopy) => humanCopy.uuid !== human.uuid);
     this._humans$.next(humans);

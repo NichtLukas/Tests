@@ -1,7 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Human } from '../human/human.model';
-import { AngularMaterialModuleDisplayHuman } from './display-human.module';
 
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTableModule } from '@angular/material/table';
 
 
 @Component({
@@ -10,7 +13,10 @@ import { AngularMaterialModuleDisplayHuman } from './display-human.module';
   templateUrl: './display-human.component.html',
   styleUrls: ['./display-human.component.css'],
   imports:[
-    AngularMaterialModuleDisplayHuman,
+    CommonModule,
+    MatIconModule,
+    MatTableModule,
+    MatButtonModule
   ]
 
 })
