@@ -10,7 +10,7 @@ import { DisplayHumanComponent } from './human/display-human.component';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { MatCardModule } from '@angular/material/card';
-import { HumanManagerComponent } from './human-manager/human-manager.component';
+import { HumanManagerComponent } from './human/human-manager.component';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
-import { Human, HumanCreate } from '../human/human.model';
-import { HumanService } from '../human/human.service';
+import { Human, HumanCreate } from './human.model';
+import { HumanService } from './human.service';
 
 @Component({
 
