@@ -4,9 +4,41 @@ import { Human, HumanCreate } from '../human/human.model';
 import { HumanService } from '../human/human.service';
 
 @Component({
+
   selector: 'app-human-manager',
-  templateUrl: './human-manager.component.html',
-  styleUrls: ['./human-manager.component.css']
+  template: `
+
+  <div class="human-wrapper">
+    <mat-card>
+      <mat-card-title>Create Human</mat-card-title>
+      <mat-card-content>
+        <app-create-human (human)="onAdd($event)">
+        </app-create-human>
+      </mat-card-content>
+    </mat-card>
+
+    <mat-card>
+      <mat-card-title>List Humans</mat-card-title>
+      <mat-card-content>
+        <app-display-human [humans]="(humans$ | async) || []" (delete)="onDelete($event)">
+        </app-display-human>
+      </mat-card-content>
+    </mat-card>
+    </div>
+    
+  `,
+  styles:[`
+    .human-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+    }
+    mat-card {
+      box-sizing: border-box;
+      width: 100%;
+      background-color: #ebfdff;
+    }
+  `],
 })
 export class HumanManagerComponent implements OnInit {
 
