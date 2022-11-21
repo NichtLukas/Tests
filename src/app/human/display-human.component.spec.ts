@@ -34,7 +34,7 @@ describe('DisplayHumanComponent with fireEvent', ()=>{
     });
     expect(humans).not.toBe([]);
 
-    humanID = 'delete:' + humans[0].id;
+    humanID = 'delete:' + humans[0].uuid;
 
     //TODO: right GET
 

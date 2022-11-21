@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, catchError, map, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Human, HumanCreate } from './human.model';
+import { Human, HumanApi, HumanCreate } from './human.model';
 
 
 
@@ -24,30 +24,52 @@ export class HumanService {
     return this._humans$.asObservable();
   }
 
-  public load(){
-
-    this.http.get<Human[]>(`${environment.api}/humans`)
+  public load(): void {
+    this.http.get<HumanApi[]>(`${environment.api}/humans`)
+    .pipe(
+      map((humansApi: HumanApi[]) => humansApi.map((humanApi: HumanApi) => {
+      return {
+        ...humanApi,
+        uuid: humanApi.id
+      }
+    })),
+    catchError((error:Error) => {
+      throw error;
+    })
+    )
     .subscribe({
-      next: (humans:Human[]) => {
+      next: (humans: Human[]) => {
         this._humans$.next(humans);
-      },
-      error: (error:Error) =>{
-        console.log(error.message);
       }
     });
   }
   
   public add(createHuman: HumanCreate): void{
-    this.http.post<HumanCreate>(`${environment.api}/humans`,createHuman).
-    subscribe((response)=>{
+    this.http.post<HumanCreate>(`${environment.api}/humans`,createHuman)
+    .subscribe((response)=>{
       console.log(response);
-    });
+    }).unsubscribe();
+
   }
 
   public deleteByObject(human: Human): void{
-    this.http.delete(`${environment.api}/humans/${human.id}`)
+    this.http.delete(`${environment.api}/humans/${human.uuid}`)
     .subscribe(()=>{
-    })
+    }).unsubscribe();
+  }
+
+  public getById(id:number):Human|undefined{
+    let human:Human|undefined;
+    this.http.get<HumanApi[]>(`${environment.api}/humans/${id}`)
+    .pipe(
+      map((humansApi: HumanApi[]) => humansApi.map((humanApi: HumanApi) => {
+      human = {
+        uuid: humanApi.id,
+        name: humanApi.name,
+        age: humanApi.age
+      }
+    }))).subscribe().unsubscribe();
+    return human;
   }
 
     // public loadHumansFromServer(destroy:Subject<void>):Observable<Human[]>{

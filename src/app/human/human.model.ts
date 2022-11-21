@@ -1,6 +1,11 @@
 import { FormControl } from "@angular/forms"
 
 export interface Human{
+    uuid:number,
+    name:string,
+    age:number,
+}
+export interface HumanApi{
     id:number,
     name:string,
     age:number,
@@ -24,7 +29,7 @@ export const DEFAULT_HUMAN_CREATE:HumanCreate = {
 }
 
 export const DEFAULT_HUMAN:Human = {
-    id: 100,
+    uuid: 100,
     name: "Max Mustermann",
     age: 18,
 }

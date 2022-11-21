@@ -12,43 +12,32 @@ import { MatTableModule } from '@angular/material/table';
   standalone: true,
   selector: 'app-display-human',
   template:`
-  <mat-list class="list">
+  <mat-list>
     <div mat-subheader>Persons</div>
-    <mat-divider></mat-divider>
     <mat-list-item *ngFor="let human of humans">
-      <mat-divider></mat-divider>
-      <div class="row-contianer">
-        <div class="name-row" matListItemTitle>{{human.name}} ({{human.age}})</div>
-          <button mat-icon-button (click)="onDelete(human)" id="delete:{{human.id}}">
-            <mat-icon>delete</mat-icon>
-          </button>
-      </div>
+      <span class="list-name">{{human.name}} ({{human.age}})</span>
+      <button mat-icon-button (click)="onDelete(human)" id="delete:{{human.uuid}}">
+        <mat-icon>delete</mat-icon>
+      </button>
     </mat-list-item>
   </mat-list>
 `,
   styles:[
-    `.list {
-      margin-top: 20px;
-      margin-left: 5%;
-      width: 90%;
-      border: 1px solid transparent;
+    `
+  mat-list-item {
+    border-top: 1px solid black;
   }
-  .row-contianer{
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      border: 1px solid transparent;
+  mat-list-item:hover {
+    background-color: rgba(224, 224, 224, 0.5);
   }
-  .name-row{
-      margin-top: 10px;
-      width: 40%;
-      font-family: monospace;
-  } 
-  .row-contianer:hover{
-      border-color: currentColor;
-      background-color: rgb(224, 224, 224);
+  .mat-list-item:last-child{
+    border-bottom: 1px solid black;
+  }
+  .list-name {
+    margin: 0 auto 0 0;
   }
   `
+
   ],
   imports:[
     CommonModule,
