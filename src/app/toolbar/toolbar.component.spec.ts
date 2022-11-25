@@ -1,5 +1,6 @@
+import { render, screen } from '@testing-library/angular';
+import '@testing-library/jest-dom/extend-expect';
 import { ToolbarComponent } from './toolbar.component';
-import {render, screen, fireEvent} from '@testing-library/angular'
 
 describe('ToolbarComponent', () => {
 

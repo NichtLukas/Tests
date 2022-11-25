@@ -62,9 +62,8 @@ describe('DisplayHumanComponent without fireEvent', ()=>{
   });
 
   it('should render DisplayHumanComponent', async () =>{
-    expect(screen.getByText('Name')).toBeInTheDocument();
-    expect(screen.getByText('Age')).toBeInTheDocument();
-    expect(screen.getByText('Options')).toBeInTheDocument();
+    expect(screen.getByText('Persons')).toBeInTheDocument();
+    //expect(screen.getByText('delete')).toBeInTheDocument();
 
   });
   it('should show new added Humans in table', async () =>{

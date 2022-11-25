@@ -52,12 +52,10 @@ export class HumanManagerComponent implements OnInit {
 
   public onAdd(human: HumanCreate): void {
     this.humanService.add(human);
-    this.humanService.load();
   }
 
   public onDelete(human:Human): void{
     this.humanService.deleteByObject(human);
-    this.humanService.load();
   }
 
 

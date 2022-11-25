@@ -1,69 +1,45 @@
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { TestBed } from '@angular/core/testing';
 import { Observable } from 'rxjs';
-import { DEFAULT_HUMAN_CREATE, Human } from './human.model';
+import { Human, HumanApi, HumanCreate } from './human.model';
 import { HumanService } from './human.service';
 
-
-describe('HumanService', () =>{
+describe('HumanService', () => {
   let service: HumanService;
+  let httpMock: HttpTestingController;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({ providers: [HumanService] });
-    service = TestBed.inject(HumanService);
-  });
-  
-  it('#humans$ should return an Observable of humans', () =>{
-    expect(service.humans$).toBeInstanceOf(Observable)
-    let humans: Human[]|undefined;
-    service.humans$.subscribe((find:Human[])=>{
-      humans = find;
-    });
-    expect(humans).toBeInstanceOf(Array);
-
-  });
-
-  it('should be created', () => {
-    expect(service).toBeTruthy();
-  });
-
-  it('#add should transform createHuman to Human and add uuid', () =>{
-
-    let human:Human = service.add(DEFAULT_HUMAN_CREATE);
-    const REGEX_UUID: RegExp = /[0-9]/;
-    expect(REGEX_UUID.test(human.uuid)).toBeTruthy();
-  });
-
-  it('#add should put human in _humans$', ()=>{
-    let didFind:Human|undefined;
-    const HUMAN:Human = service.add(DEFAULT_HUMAN_CREATE);
-    service.humans$.subscribe((humans:Human[])=>{
-        didFind = humans.find((searchHuman:Human) =>{
-        return searchHuman.uuid === HUMAN.uuid  
+      TestBed.configureTestingModule({
+          imports: [HttpClientTestingModule],
+          providers: [
+            HumanService
+          ]
       });
-    });
-    expect(didFind).toBeDefined()
+      service = TestBed.inject(HumanService);
+      httpMock = TestBed.inject(HttpTestingController);
   });
 
-  it('#deleteByObject should delete an human from humans$',() =>{
-    const HUMAN:Human = service.add(DEFAULT_HUMAN_CREATE);
-    let didFind:Human | undefined
-    service.deleteByObject(HUMAN);
-    service.humans$.subscribe((humans:Human[])=>{
-        didFind = humans.find((searchHuman:Human) =>{
-        return searchHuman.uuid === HUMAN.uuid  
-      });
-    });
-    expect(didFind).toBeUndefined()
+  it('#add should add human in humans', ()=>{
+    const expectedCreate:HumanCreate = {name:'Max Mustermann',age:18}
+    service.add(expectedCreate);
+    const req = httpMock.expectOne(`/api/humans`);
+    expect(req.request.responseType).toEqual('json');
+    expect(req.request.method).toEqual('POST');
+    expect(req.request.body).toEqual(expectedCreate);
   });
 
+  it('#deleteByObject should delete from humans', () =>{
+    const expectedDelete:Human = {name:'Max Mustermann',age:18, uuid:1}
+    service.deleteByObject(expectedDelete);
+    const req = httpMock.expectOne(`/api/humans/1`);
+    expect(req.request.responseType).toEqual('json');
+    expect(req.request.method).toEqual('DELETE');
+    expect(req.request.body).toEqual(null);
+  });
+
+  it('getByID should return Observable of HumanAPI', () =>{
+    const expectedSearch:HumanApi = {name:'Max Mustermann',age:18, id:1}
+    const human$:Observable<HumanApi> = service.getById(expectedSearch.id);
+    expect(human$).toBeInstanceOf(Observable);
+  });
 });
-
-
-
-//   it('#humans$ should return an Observable of humans',() =>{
-//     expect(service.humans$).toBeInstanceOf(Observable<Human[]>);
-//   })
-
-
-
-

@@ -5,9 +5,11 @@ import { DisplayHumanComponent } from '../human/display-human.component';
 import { HumanManagerComponent } from './human-manager.component';
 
 import { CommonModule } from '@angular/common';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { MatIconModule } from '@angular/material/icon';
 import { MatTableModule } from '@angular/material/table';
 import { BrowserModule } from '@angular/platform-browser';
+import { HumanService } from './human.service';
 
 describe('HumanManagerComponent', () => {
   let component: HumanManagerComponent;
@@ -17,6 +19,7 @@ describe('HumanManagerComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ HumanManagerComponent, ],
       imports: [
+        HttpClientTestingModule,
         CreateHumanComponent,
         BrowserAnimationsModule,
         MatTableModule,
@@ -24,6 +27,9 @@ describe('HumanManagerComponent', () => {
         BrowserModule,
         MatIconModule,
         DisplayHumanComponent,
+      ],
+      providers: [
+        HumanService
       ]
     })
     .compileComponents();

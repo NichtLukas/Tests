@@ -1,7 +1,7 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, catchError, map, Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { environment } from '../../environments/environment';
 import { Human, HumanApi, HumanCreate } from './human.model';
 
 
@@ -9,7 +9,7 @@ import { Human, HumanApi, HumanCreate } from './human.model';
 @Injectable({
   providedIn: 'root'
 })
-export class HumanService {
+export class HumanService  {
 
   //_ = Private 
   //$ = BehaviorSubject
@@ -19,6 +19,7 @@ export class HumanService {
   constructor(private http: HttpClient) { 
     this._humans$ = new BehaviorSubject<Human[]>([]);
   }
+
 
   public get humans$():Observable<Human[]>{
     return this._humans$.asObservable();
@@ -44,41 +45,39 @@ export class HumanService {
     });
   }
   
-  public add(createHuman: HumanCreate): void{
-    this.http.post<HumanCreate>(`${environment.api}/humans`,createHuman)
-    .subscribe((response)=>{
-      console.log(response);
-    }).unsubscribe();
 
+  public add(createHuman: HumanCreate): void{
+     this.http.post<HumanApi>(`${environment.api}/humans`,createHuman).subscribe({
+      next: ()=>{
+        this.load();  
+      },
+      complete: ()=>{
+        console.log('add complete')
+      },
+      error: (error: HttpErrorResponse)=>{
+        console.log(error)
+      }
+     })
   }
 
   public deleteByObject(human: Human): void{
-    this.http.delete(`${environment.api}/humans/${human.uuid}`)
-    .subscribe(()=>{
-    }).unsubscribe();
-  }
-
-  public getById(id:number):Human|undefined{
-    let human:Human|undefined;
-    this.http.get<HumanApi[]>(`${environment.api}/humans/${id}`)
-    .pipe(
-      map((humansApi: HumanApi[]) => humansApi.map((humanApi: HumanApi) => {
-      human = {
-        uuid: humanApi.id,
-        name: humanApi.name,
-        age: humanApi.age
+    this.http.delete(`${environment.api}/humans/${human.uuid}`).subscribe({
+      next: ()=>{
+        this.load();  
+      },
+      complete: ()=>{
+        console.log('delete complete')
+      },
+      error: (error: HttpErrorResponse)=>{
+        console.log(error)
       }
-    }))).subscribe().unsubscribe();
-    return human;
+     })
   }
 
-    // public loadHumansFromServer(destroy:Subject<void>):Observable<Human[]>{
-  //   return  this.http.get<Human[]>(`${environment.api}/humans`)
-  //   .pipe(takeUntil(destroy));
-  // }
+  public getById(id:number): Observable<HumanApi>{
+   return this.http.get<HumanApi>(`${environment.api}/humans/${id}`)
 
+  }
 
-  // public loadHumansFromServer(){
-  //   this.http.get<Human[]>(`${environment.api}/humans`)
-  // }
 }
+
