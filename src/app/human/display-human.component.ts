@@ -12,11 +12,12 @@ import { MatTableModule } from '@angular/material/table';
   standalone: true,
   selector: 'app-display-human',
   template:`
-  <mat-list>
+  <mat-list aria-label="display-human-list">
     <div mat-subheader>Persons</div>
     <mat-list-item *ngFor="let human of humans">
       <span class="list-name">{{human.name}} ({{human.age}})</span>
-      <button mat-icon-button (click)="onDelete(human)" id="delete:{{human.uuid}}">
+      <button mat-icon-button (click)="onDelete(human)" id="delete:{{human.uuid}}" [attr.data-testid]='"delete:" + human.uuid'>
+        <!-- data-testid="1234-{{human.uuid}} -->
         <mat-icon>delete</mat-icon>
       </button>
     </mat-list-item>

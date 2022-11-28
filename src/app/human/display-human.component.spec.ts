@@ -1,78 +1,43 @@
-import { HttpClient } from '@angular/common/http';
-import { render, RenderResult, screen } from '@testing-library/angular';
+import { fireEvent, render, RenderResult, screen } from '@testing-library/angular';
 import '@testing-library/jest-dom/extend-expect';
-import { Human } from '../human/human.model';
-import { HumanService } from '../human/human.service';
 import { DisplayHumanComponent } from './display-human.component';
 
-
-
-describe('DisplayHumanComponent with fireEvent', ()=>{
-  let rendered:RenderResult<DisplayHumanComponent, DisplayHumanComponent>
-  let submitSpy: jest.Mock<any,any>
-  let humanService: HumanService;
-  let httpClient: HttpClient;
-  
-
-  beforeEach(async () =>{
-    submitSpy = jest.fn();
-    humanService = new HumanService(httpClient);
-    rendered = await render(DisplayHumanComponent, {
-      imports:[DisplayHumanComponent,],
-      componentProperties:{
-        onDelete:submitSpy,
-      }
-    });
- 
-  });
-
-  it('should delete Human from table after clicking on delete', async () =>{
-    let humans:Human[] = [];
-    let humanID = '';
-    humanService.humans$.subscribe((value:Human[])=>{
-      humans = value; 
-    });
-    expect(humans).not.toBe([]);
-
-    humanID = 'delete:' + humans[0].uuid;
-
-    //TODO: right GET
-
-    //const deleteButton = screen.(humanID);
-    //fireEvent.click(deleteButton);
-
-    expect(submitSpy).toBeCalled();
-    
-    expect(screen.getByText(humanID)).not.toBeInTheDocument();
-
-  });
-
-
-
-});
 
 describe('DisplayHumanComponent without fireEvent', ()=>{
 
   let rendered:RenderResult<DisplayHumanComponent, DisplayHumanComponent>
+  const submitSpy = jest.fn();
+
 
   beforeEach(async () =>{
     rendered = await render(DisplayHumanComponent, {
-      imports:[DisplayHumanComponent,]
+      imports:[DisplayHumanComponent,],
+      componentProperties:{
+        humans:[
+          {name:"test1",age:73,uuid:1},
+          {name:"test2",age:74,uuid:2},
+          {name:"test3",age:75,uuid:3}
+        ],
+        onDelete:submitSpy,
+      }
     });
   });
 
   it('should render DisplayHumanComponent', async () =>{
     expect(screen.getByText('Persons')).toBeInTheDocument();
-    //expect(screen.getByText('delete')).toBeInTheDocument();
-
-  });
-  it('should show new added Humans in table', async () =>{
-    
+    expect(screen.getByText('test1 (73)')).toBeInTheDocument();
+    expect(screen.getByText('test2 (74)')).toBeInTheDocument();
+    expect(screen.getByText('test3 (75)')).toBeInTheDocument();
   });
 
-  it('should show all information about one Humans in the right row', async () =>{
-    
+  it('should call onDelete if icon is clicked', async () => {
+    const deleteButton = screen.getByTestId('delete:' + 1)
+    fireEvent.click(deleteButton);
+    expect(submitSpy).toBeCalledTimes(1);
   });
+
+  
+
 
 });
 

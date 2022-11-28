@@ -1,14 +1,10 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CreateHumanComponent } from '../human/create-human.component';
 import { DisplayHumanComponent } from '../human/display-human.component';
 import { HumanManagerComponent } from './human-manager.component';
 
-import { CommonModule } from '@angular/common';
-import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTableModule } from '@angular/material/table';
-import { BrowserModule } from '@angular/platform-browser';
 import { HumanService } from './human.service';
 
 describe('HumanManagerComponent', () => {
@@ -19,14 +15,14 @@ describe('HumanManagerComponent', () => {
     await TestBed.configureTestingModule({
       declarations: [ HumanManagerComponent, ],
       imports: [
-        HttpClientTestingModule,
-        CreateHumanComponent,
-        BrowserAnimationsModule,
-        MatTableModule,
-        CommonModule,
-        BrowserModule,
-        MatIconModule,
         DisplayHumanComponent,
+        CreateHumanComponent,
+        HttpClientTestingModule,
+        BrowserAnimationsModule,
+        // MatTableModule,
+        // CommonModule,
+        // BrowserModule,
+        // MatIconModule,
       ],
       providers: [
         HumanService
@@ -42,4 +38,8 @@ describe('HumanManagerComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+  
+
+
 });

@@ -4,9 +4,6 @@ import { CreateHumanComponent } from './create-human.component';
 
 
 describe('CreateHumanComponent with Forms', ()=>{
-  let inputName:HTMLElement;
-  let inputAge:HTMLElement;
-  let inputAgeReset:HTMLElement;
   let inputNameReset:HTMLElement;
   let rendered:RenderResult<CreateHumanComponent, CreateHumanComponent>
   let submitSpy: jest.Mock<any,any>
@@ -19,11 +16,7 @@ describe('CreateHumanComponent with Forms', ()=>{
       componentProperties:{
         emitFormValue:submitSpy,
     }});
-   
-    inputName = rendered.getByLabelText('nameInput');
     inputNameReset = rendered.getByLabelText('nameInputReset');
-    inputAge = rendered.getByLabelText('ageInput');
-    inputAgeReset = rendered.getByLabelText('ageInputReset');
   });
 
 
